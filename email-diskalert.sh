@@ -1,13 +1,18 @@
-#!/bin/bash
-
-# VARIABLES
+#!/usr/bin/env bash
+#
+# ScriptName - email-diskalert
+# Site:       https://n4wt.wordpress.com
+# Autor:      Newton
+# ------------------------------------------------------------------------ #
+#--------------------- VARIABLES ----------------------------------------- #
 CURRENT=$(df / | grep / | awk '{ print $5}' | sed 's/%//g')
 THRESHOLD=90
+EMAIL=myemail@domain.com
 
-
-# EXECUTION
+# --------------------- EXECUÇÃO ----------------------------------------- #
 if [ "$CURRENT" -gt "$THRESHOLD" ] ; then
-mail -s 'Disk Space Alert' myemail@domain.com << EOF
+mail -s 'Disk Space Alert' $EMAIL << EOF
 Your root partition remaining free space is critically low. Used: $CURRENT%
 EOF
 fi
+# ------------------------------------------------------------------------ #
